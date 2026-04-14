@@ -1,0 +1,11 @@
+{
+  "name": "gronspot",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@vercel/node": "^3.0.0"
+  }
+}

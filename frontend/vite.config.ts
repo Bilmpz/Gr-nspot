@@ -10,7 +10,8 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:5249',
+        // In dev: run `vercel dev` from root (port 3000) to get API + frontend together
+        target: 'http://localhost:3000',
         changeOrigin: true,
       },
     },
