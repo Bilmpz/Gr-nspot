@@ -1,0 +1,6 @@
+@CheapHours.Api_HostAddress = http://localhost:5249
+
+GET {{CheapHours.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

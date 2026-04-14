@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CheapHours.Api</name>
+    </assembly>
+    <members>
+        <member name="T:CheapHours.Api.Controllers.PowerController">
+            <summary>
+            Endpoints for Danish electricity spot prices.
+            </summary>
+        </member>
+        <member name="M:CheapHours.Api.Controllers.PowerController.GetToday(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Returns all 24 hourly prices for today.
+            </summary>
+            <param name="area">Price area: DK1 or DK2</param>
+        </member>
+        <member name="M:CheapHours.Api.Controllers.PowerController.GetTomorrow(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Returns all 24 hourly prices for tomorrow (if published).
+            </summary>
+            <param name="area">Price area: DK1 or DK2</param>
+        </member>
+        <member name="M:CheapHours.Api.Controllers.PowerController.GetCheapest(System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Returns the N cheapest individual hours, sorted ascending by price.
+            </summary>
+            <param name="area">Price area: DK1 or DK2</param>
+            <param name="count">Number of hours (1–24)</param>
+        </member>
+        <member name="M:CheapHours.Api.Controllers.PowerController.GetBestWindow(System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Returns the cheapest contiguous block of N hours using a sliding window.
+            </summary>
+            <param name="area">Price area: DK1 or DK2</param>
+            <param name="durationHours">Window size in hours (1–24)</param>
+        </member>
+        <member name="M:CheapHours.Api.Controllers.PowerController.GetSummary(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Returns price statistics: min, max, average, cheapest/most expensive hour, and hours below average.
+            </summary>
+            <param name="area">Price area: DK1 or DK2</param>
+        </member>
+        <member name="T:CheapHours.Api.Models.BestWindow">
+            <summary>
+            Represents the cheapest contiguous block of hours.
+            </summary>
+        </member>
+        <member name="M:CheapHours.Api.Models.BestWindow.#ctor(System.String,System.String,System.Int32,System.Decimal,System.Collections.Generic.IReadOnlyList{CheapHours.Api.Models.HourlyPrice})">
+            <summary>
+            Represents the cheapest contiguous block of hours.
+            </summary>
+        </member>
+        <member name="T:CheapHours.Api.Models.HourlyPrice">
+            <summary>
+            Represents a single hour's electricity spot price.
+            </summary>
+        </member>
+        <member name="M:CheapHours.Api.Models.HourlyPrice.#ctor(System.String,System.Decimal,System.String)">
+            <summary>
+            Represents a single hour's electricity spot price.
+            </summary>
+        </member>
+        <member name="T:CheapHours.Api.Models.PriceSummary">
+            <summary>
+            Aggregated price statistics for a day.
+            </summary>
+        </member>
+        <member name="M:CheapHours.Api.Models.PriceSummary.#ctor(System.Decimal,System.Decimal,System.Decimal,CheapHours.Api.Models.HourlyPrice,CheapHours.Api.Models.HourlyPrice,System.Int32,System.String,System.String)">
+            <summary>
+            Aggregated price statistics for a day.
+            </summary>
+        </member>
+        <member name="T:Program">
+            <summary>
+            Auto-generated public partial Program class for top-level statement apps.
+            </summary>
+        </member>
+    </members>
+</doc>
