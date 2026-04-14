@@ -17,74 +17,39 @@ Formålet er at gøre det nemt at se hvornår strømmen er billig, så man kan p
 
 ---
 
-## Kom i gang
-
-Du skal bruge .NET 10 og Node 18+ installeret.
-
-**Start backend:**
-```bash
-cd backend
-dotnet run --project CheapHours.Api
-```
-API kører på `http://localhost:5249` — Swagger UI på `http://localhost:5249/swagger`
-
-**Start frontend:**
-```bash
-cd frontend
-npm install
-npm run dev
-```
-App kører på `http://localhost:5173`
-
-Frontendens `/api`-kald bliver automatisk proxiet til backend via Vite.
-
----
-
-## Filstruktur
+## Arkitektur
 
 ```
 GrønSpot/
-├── README.md
+├── api/                                # Vercel Serverless Functions (Node.js/TypeScript)
+│   ├── _lib/
+│   │   └── power.ts                   # Fælles logik: fetch, beregninger, typer
+│   └── power/
+│       ├── today.ts                   # GET /api/power/today
+│       ├── tomorrow.ts                # GET /api/power/tomorrow
+│       ├── cheapest.ts                # GET /api/power/cheapest
+│       ├── best-window.ts             # GET /api/power/best-window
+│       └── summary.ts                 # GET /api/power/summary
 │
-├── backend/
-│   └── CheapHours.Api/
-│       ├── Clients/
-│       │   ├── IElspotClient.cs        # Interface for dataklient
-│       │   └── ElspotClient.cs         # Henter DayAheadPrices fra Energi Data Service
-│       ├── Controllers/
-│       │   └── PowerController.cs      # API-endpoints: /today /tomorrow /cheapest /best-window /summary
-│       ├── Middleware/
-│       │   └── GlobalExceptionMiddleware.cs  # Fanger alle fejl og returnerer JSON
-│       ├── Models/
-│       │   ├── HourlyPrice.cs          # En times pris
-│       │   ├── BestWindow.cs           # Billigste sammenhængende blok
-│       │   └── PriceSummary.cs         # Daglig statistik
-│       ├── Services/
-│       │   ├── IPowerService.cs        # Service-interface
-│       │   └── PowerService.cs         # Forretningslogik + IMemoryCache (30/60 min)
-│       ├── Program.cs                  # DI, Swagger, CORS, middleware-pipeline
-│       └── appsettings.json
+├── frontend/                          # React 19 + Vite + Tailwind
+│   └── src/
+│       ├── api/
+│       │   └── api.ts                 # Alle fetch-funktioner + hjælpere (toKr, formatHour)
+│       ├── components/
+│       │   ├── Navbar.tsx             # Topbar med logo og aktivt prisområde
+│       │   ├── AreaSelector.tsx       # Skift mellem Vest/Øst
+│       │   ├── PriceBarChart.tsx      # Søjlediagram via Recharts
+│       │   ├── MetricCard.tsx         # Statistik-kort med farvet venstre-kant
+│       │   └── LoadingSkeleton.tsx    # Shimmer-loading
+│       └── pages/
+│           ├── TodayPage.tsx          # Dagens timepriser
+│           ├── TomorrowPage.tsx       # Morgendagens priser (404 hvis ikke udgivet endnu)
+│           ├── CheapestPage.tsx       # N billigste timer med slider
+│           ├── BestWindowPage.tsx     # Bedste sammenhængende vindue med slider
+│           └── SummaryPage.tsx        # Dagsoversigt med nøgletal
 │
-└── frontend/
-    ├── src/
-    │   ├── api/
-    │   │   └── api.ts                  # Alle fetch-funktioner + hjælpere (toKr, formatHour)
-    │   ├── components/
-    │   │   ├── Navbar.tsx              # Topbar med logo og aktivt prisområde
-    │   │   ├── AreaSelector.tsx        # Skift mellem Vest/Øst
-    │   │   ├── PriceBarChart.tsx       # Søjlediagram via Recharts
-    │   │   ├── MetricCard.tsx          # Statistik-kort med farvet venstre-kant
-    │   │   └── LoadingSkeleton.tsx     # Shimmer-loading
-    │   ├── pages/
-    │   │   ├── TodayPage.tsx           # Dagens timepriser
-    │   │   ├── TomorrowPage.tsx        # Morgendagens priser (404 hvis ikke udgivet endnu)
-    │   │   ├── CheapestPage.tsx        # N billigste timer med slider
-    │   │   ├── BestWindowPage.tsx      # Bedste sammenhængende vindue med slider
-    │   │   └── SummaryPage.tsx         # Dagsoversigt med nøgletal
-    │   ├── App.tsx                     # Router, tabs, area-state
-    │   └── main.tsx
-    ├── vite.config.ts                  # Proxy /api → localhost:5249
-    └── package.json
+├── vercel.json                        # Vercel-konfiguration (build + routing)
+└── package.json                       # Root-pakke (Vercel Node types)
 ```
 
 ---
@@ -93,15 +58,18 @@ GrønSpot/
 
 Priserne kommer fra [Energi Data Service](https://www.energidataservice.dk/) — det officielle, gratis og åbne API fra Energinet. Datasættet hedder **DayAheadPrices** (afløser for det udgåede Elspotprices-datasæt pr. 30. september 2025).
 
-Priserne er i DKK/MWh og omregnes til kr/kWh i backend. De afspejler spotprisen ekskl. tariffer, afgifter og moms.
+Priserne er i DKK/MWh og omregnes til kr/kWh i API-laget. De afspejler spotprisen ekskl. tariffer, afgifter og moms.
 
 ---
 
 ## Caching
 
-| Data             | Nøgle                    | Varighed   |
-|------------------|--------------------------|------------|
-| Dagens priser    | `prices_{area}_{dato}`   | 30 minutter |
-| Morgendagens priser | `prices_{area}_{dato}` | 60 minutter |
+| Data                | Nøgle                    | Server (Vercel CDN) | Frontend (TanStack Query) |
+|---------------------|--------------------------|---------------------|---------------------------|
+| Dagens priser       | `prices_{area}_{dato}`   | 30 minutter         | 5 minutter                |
+| Morgendagens priser | `prices_{area}_{dato}`   | 60 minutter         | 5 minutter                |
 
-Frontend cacher via TanStack Query med `staleTime: 5 minutter`.
+---
+
+
+```
