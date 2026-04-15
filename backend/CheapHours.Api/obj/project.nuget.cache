@@ -1,25 +1,25 @@
 {
   "version": 2,
-  "dgSpecHash": "w/0714ufmX4=",
+  "dgSpecHash": "VHBYwSDP3rM=",
   "success": true,
-  "projectFilePath": "/Users/oliverlobel/Desktop/Cheaphours/backend/CheapHours.Api/CheapHours.Api.csproj",
+  "projectFilePath": "C:\\Users\\olive\\Gr-nspot\\backend\\CheapHours.Api\\CheapHours.Api.csproj",
   "expectedPackageFiles": [
-    "/Users/oliverlobel/.nuget/packages/microsoft.extensions.apidescription.server/10.0.0/microsoft.extensions.apidescription.server.10.0.0.nupkg.sha512",
-    "/Users/oliverlobel/.nuget/packages/microsoft.extensions.caching.memory/10.0.6/microsoft.extensions.caching.memory.10.0.6.nupkg.sha512",
-    "/Users/oliverlobel/.nuget/packages/microsoft.openapi/2.4.1/microsoft.openapi.2.4.1.nupkg.sha512",
-    "/Users/oliverlobel/.nuget/packages/swashbuckle.aspnetcore/10.1.7/swashbuckle.aspnetcore.10.1.7.nupkg.sha512",
-    "/Users/oliverlobel/.nuget/packages/swashbuckle.aspnetcore.swagger/10.1.7/swashbuckle.aspnetcore.swagger.10.1.7.nupkg.sha512",
-    "/Users/oliverlobel/.nuget/packages/swashbuckle.aspnetcore.swaggergen/10.1.7/swashbuckle.aspnetcore.swaggergen.10.1.7.nupkg.sha512",
-    "/Users/oliverlobel/.nuget/packages/swashbuckle.aspnetcore.swaggerui/10.1.7/swashbuckle.aspnetcore.swaggerui.10.1.7.nupkg.sha512"
+    "C:\\Users\\olive\\.nuget\\packages\\microsoft.extensions.apidescription.server\\10.0.0\\microsoft.extensions.apidescription.server.10.0.0.nupkg.sha512",
+    "C:\\Users\\olive\\.nuget\\packages\\microsoft.extensions.caching.memory\\10.0.6\\microsoft.extensions.caching.memory.10.0.6.nupkg.sha512",
+    "C:\\Users\\olive\\.nuget\\packages\\microsoft.openapi\\2.4.1\\microsoft.openapi.2.4.1.nupkg.sha512",
+    "C:\\Users\\olive\\.nuget\\packages\\swashbuckle.aspnetcore\\10.1.7\\swashbuckle.aspnetcore.10.1.7.nupkg.sha512",
+    "C:\\Users\\olive\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\10.1.7\\swashbuckle.aspnetcore.swagger.10.1.7.nupkg.sha512",
+    "C:\\Users\\olive\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\10.1.7\\swashbuckle.aspnetcore.swaggergen.10.1.7.nupkg.sha512",
+    "C:\\Users\\olive\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\10.1.7\\swashbuckle.aspnetcore.swaggerui.10.1.7.nupkg.sha512"
   ],
   "logs": [
     {
       "code": "NU1510",
       "level": "Warning",
       "message": "PackageReference Microsoft.Extensions.Caching.Memory will not be pruned. Consider removing this package from your dependencies, as it is likely unnecessary.",
-      "projectPath": "/Users/oliverlobel/Desktop/Cheaphours/backend/CheapHours.Api/CheapHours.Api.csproj",
+      "projectPath": "C:\\Users\\olive\\Gr-nspot\\backend\\CheapHours.Api\\CheapHours.Api.csproj",
       "warningLevel": 1,
-      "filePath": "/Users/oliverlobel/Desktop/Cheaphours/backend/CheapHours.Api/CheapHours.Api.csproj",
+      "filePath": "C:\\Users\\olive\\Gr-nspot\\backend\\CheapHours.Api\\CheapHours.Api.csproj",
       "libraryId": "Microsoft.Extensions.Caching.Memory",
       "targetGraphs": [
         "net10.0"
