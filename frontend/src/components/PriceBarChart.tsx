@@ -70,7 +70,7 @@ export default function PriceBarChart({ prices, highlightStart, highlightEnd }: 
           tick={{ fontSize: 10, fill: '#9CA3AF' }}
           tickLine={false}
           axisLine={false}
-          interval={1}
+          interval={3}
         />
         <YAxis
           tick={{ fontSize: 10, fill: '#9CA3AF' }}

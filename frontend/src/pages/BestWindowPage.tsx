@@ -109,22 +109,22 @@ export default function BestWindowPage({ area }: Props) {
             >
               Bedste {duration}-timers vindue i dag
             </p>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-3 gap-2">
               <div>
                 <p style={{ color: '#6B7280', fontSize: '11px', marginBottom: '4px' }}>Start</p>
-                <p style={{ fontSize: '22px', fontWeight: 900, color: 'white' }}>
-                  Kl. {formatHour(win.startHour)}
+                <p style={{ fontSize: '17px', fontWeight: 900, color: 'white' }}>
+                  {formatHour(win.startHour)}
                 </p>
               </div>
               <div>
                 <p style={{ color: '#6B7280', fontSize: '11px', marginBottom: '4px' }}>Slut</p>
-                <p style={{ fontSize: '22px', fontWeight: 900, color: 'white' }}>
-                  Kl. {formatHour(win.endHour)}
+                <p style={{ fontSize: '17px', fontWeight: 900, color: 'white' }}>
+                  {formatHour(win.endHour)}
                 </p>
               </div>
               <div>
                 <p style={{ color: '#6B7280', fontSize: '11px', marginBottom: '4px' }}>Gns. pris</p>
-                <p style={{ fontSize: '22px', fontWeight: 900, color: '#4ADE80' }}>
+                <p style={{ fontSize: '17px', fontWeight: 900, color: '#4ADE80' }}>
                   {toKr(win.averagePriceKrPerKwh).toFixed(2)}
                 </p>
                 <p style={{ color: '#6B7280', fontSize: '11px' }}>kr/kWh</p>

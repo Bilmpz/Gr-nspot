@@ -20,7 +20,7 @@ const TABS = [
 ];
 
 function AppInner() {
-  const [area, setArea] = useState<string>(() => localStorage.getItem('area') ?? 'DK1');
+  const [area, setArea] = useState<string>(() => localStorage.getItem('area') ?? 'DK2');
 
   const handleAreaChange = (a: string) => {
     setArea(a);
@@ -39,33 +39,40 @@ function AppInner() {
         </div>
 
         {/* Underline-style tab bar */}
-        <div
-          className="flex gap-0 overflow-x-auto no-scrollbar mb-6"
-          style={{ borderBottom: '2px solid #E5E7EB' }}
-        >
-          {TABS.map((tab) => (
-            <NavLink
-              key={tab.path}
-              to={tab.path}
-              className="no-underline"
-              style={({ isActive }) => ({
-                padding: '10px 16px',
-                fontSize: '13px',
-                fontWeight: isActive ? 700 : 500,
-                color: isActive ? '#16A34A' : '#6B7280',
-                borderBottom: isActive ? '2px solid #16A34A' : '2px solid transparent',
-                marginBottom: '-2px',
-                whiteSpace: 'nowrap',
-                flexShrink: 0,
-                textDecoration: 'none',
-                transition: 'color 0.15s, border-color 0.15s',
-                background: 'none',
-                cursor: 'pointer',
-              })}
-            >
-              {tab.label}
-            </NavLink>
-          ))}
+        <div className="relative mb-6">
+          <div
+            className="flex gap-0 overflow-x-auto no-scrollbar"
+            style={{ borderBottom: '2px solid #E5E7EB' }}
+          >
+            {TABS.map((tab) => (
+              <NavLink
+                key={tab.path}
+                to={tab.path}
+                className="no-underline"
+                style={({ isActive }) => ({
+                  padding: '10px 12px',
+                  fontSize: '13px',
+                  fontWeight: isActive ? 700 : 500,
+                  color: isActive ? '#16A34A' : '#6B7280',
+                  borderBottom: isActive ? '2px solid #16A34A' : '2px solid transparent',
+                  marginBottom: '-2px',
+                  whiteSpace: 'nowrap',
+                  flexShrink: 0,
+                  textDecoration: 'none',
+                  transition: 'color 0.15s, border-color 0.15s',
+                  background: 'none',
+                  cursor: 'pointer',
+                })}
+              >
+                {tab.label}
+              </NavLink>
+            ))}
+          </div>
+          {/* Fade to indicate more tabs on narrow screens */}
+          <div
+            className="absolute right-0 top-0 bottom-0 w-8 pointer-events-none"
+            style={{ background: 'linear-gradient(to right, transparent, #FAFAF9)' }}
+          />
         </div>
 
         {/* Page content */}
